@@ -1,0 +1,45 @@
+/* IDeal */
+
+html,
+body {
+    height: 100%;
+    font-family: "Century Gothic";
+}
+body { padding-top: 54px }
+@media (min-width: 992px) {
+    body { padding-top: 56px }
+}
+
+a { cursor:pointer }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+.img-profil{
+    width: 150px;
+    height: 150px;
+}
+
+.alignLeft {
+    float: left;
+    margin-right: 15px;
+}
+
+.alignRight {
+    float: right;
+    margin-left: 15px;
+}
+
+.alignCenter {
+    display: table;
+    margin: 0 auto 15px;
+}
+
+.alignTextCenter{
+    text-align: center;
+}
+
+.textBold { font-weight: bold }
+
+#userSettingPage{display: none;}
