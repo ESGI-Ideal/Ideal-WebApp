@@ -1,29 +1,30 @@
 {
-    "title": "Shop Homepage",
-    "name": "startbootstrap-shop-homepage",
+    "title": "Ideal Shop Website",
+    "name": "ideal-shop-web",
+    "description": "A shop who search and compare for you",
     "version": "1.0.0",
-    "description": "A shop homepage HTML template built with Bootstrap",
     "keywords": [
-        "css",
-        "sass",
-        "html",
-        "responsive",
-        "theme",
-        "template"
+        "Ideal Shop",
+        "shop",
+        "web",
+        "website",
+        "webapp"
     ],
-    "homepage": "https://startbootstrap.com/template-overviews/shop-homepage",
+    "//": "license\": \"private",
+    "homepage": "https://github.com/ESGI-Ideal/Ideal-WebApp",
     "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-shop-homepage/issues",
-        "email": "feedback@startbootstrap.com"
+        "url": "https://github.com/ESGI-Ideal/Ideal-WebApp/issues",
+        "//": "\"email\": \"feedback@idealshop.com"
     },
-    "license": "MIT",
-    "author": "Start Bootstrap",
+    "private": true,
+    "author": "ESGI Prestation",
     "contributors": [
-        "David Miller (http://davidmiller.io/)"
+        "Loghan R. (https://github.com/LoghanRamassamy)",
+        "Tristan (https://github.com/TristanEduProjet)"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/BlackrockDigital/startbootstrap-shop-homepage.git"
+        "url": "https://github.com/ESGI-Ideal/Ideal-WebApp.git"
     },
     "dependencies": {
         "bootstrap": "4.0.0",
