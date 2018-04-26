@@ -1,0 +1,31 @@
+{
+  "name": "ideal-shop-web",
+  "description": "A shop who search and compare for you",
+  "main": "src/index.html",
+  "authors": [
+    "Loghan R. (https://github.com/LoghanRamassamy)",
+    "Tristan (https://github.com/TristanEduProjet)"
+  ],
+  "license": "none",
+  "keywords": [
+    "Ideal",
+    "Shop",
+    "shop",
+    "web",
+    "website",
+    "webapp"
+  ],
+  "homepage": "https://github.com/ESGI-Ideal/Ideal-WebApp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.1.0"
+  }
+}

@@ -12,7 +12,7 @@ lib-cov
 coverage
 .nyc_output
 .grunt
-bower_components
+bower_components/
 .lock-wscript
 build/Release
 node_modules/

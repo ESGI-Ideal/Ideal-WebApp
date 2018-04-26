@@ -10,7 +10,9 @@
         "website",
         "webapp"
     ],
-    "files": ["src/*"],
+    "files": [
+        "src/*"
+    ],
     "homepage": "https://esgi-ideal.github.io/webapp",
     "bugs": {
         "url": "https://github.com/ESGI-Ideal/Ideal-WebApp/issues",
@@ -22,15 +24,16 @@
         "Loghan R. (https://github.com/LoghanRamassamy)",
         "Tristan (https://github.com/TristanEduProjet)"
     ],
+    "scripts": {
+        "postinstall": "./node_modules/.bin/bower install"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/ESGI-Ideal/Ideal-WebApp.git"
     },
-    "dependencies": {
-        "bootstrap": "4.0.0",
-        "jquery": "3.3.1"
-    },
+    "dependencies": {},
     "devDependencies": {
+        "bower": "^1.8.4",
         "browser-sync": "2.23.6",
         "gulp": "^3.9.1"
     }
