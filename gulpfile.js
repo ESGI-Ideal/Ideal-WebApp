@@ -1,9 +1,10 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
-var pkg = require('./package.json');
 
 // Copy third party libraries from /node_modules into /vendor
 gulp.task('vendor', function() {
+    gulp.src('./src/**/*')
+        .pipe(gulp.dest('./vendor'));
 
   // Bootstrap
   gulp.src([
@@ -11,7 +12,7 @@ gulp.task('vendor', function() {
       '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
       '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
     ])
-    .pipe(gulp.dest('./vendor/bootstrap'))
+    .pipe(gulp.dest('./vendor/bootstrap'));
 
   // jQuery
   gulp.src([
@@ -20,7 +21,7 @@ gulp.task('vendor', function() {
     ])
     .pipe(gulp.dest('./vendor/jquery'))
 
-})
+});
 
 // Default task
 gulp.task('default', ['vendor']);

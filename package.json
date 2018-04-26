@@ -10,8 +10,8 @@
         "website",
         "webapp"
     ],
-    "//": "license\": \"private",
-    "homepage": "https://github.com/ESGI-Ideal/Ideal-WebApp",
+    "files": ["src/*"],
+    "homepage": "https://esgi-ideal.github.io/webapp",
     "bugs": {
         "url": "https://github.com/ESGI-Ideal/Ideal-WebApp/issues",
         "//": "\"email\": \"feedback@idealshop.com"
