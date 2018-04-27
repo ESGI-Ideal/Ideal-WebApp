@@ -1,42 +1,36 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
+"use strict";
+const gulp = require('gulp');
+const mainBowerFiles = require('main-bower-files');
+const browserSync = require('browser-sync').create();
+
+gulp.task('deps', function() {
+    return gulp.src(mainBowerFiles({
+        checkExistence: true
+    }))
+        .pipe(gulp.dest('./vendor/libs'));
+});
 
 // Copy third party libraries from /node_modules into /vendor
 gulp.task('vendor', function() {
     gulp.src('./src/**/*')
         .pipe(gulp.dest('./vendor'));
-
-  // Bootstrap
-  gulp.src([
-      './node_modules/bootstrap/dist/**/*',
-      '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
-      '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
-    ])
-    .pipe(gulp.dest('./vendor/bootstrap'));
-
-  // jQuery
-  gulp.src([
-      './node_modules/jquery/dist/*',
-      '!./node_modules/jquery/dist/core.js'
-    ])
-    .pipe(gulp.dest('./vendor/jquery'))
-
 });
 
 // Default task
-gulp.task('default', ['vendor']);
+gulp.task('default', ['vendor', 'deps']);
 
 // Configure the browserSync task
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: "./"
+      baseDir: "./vendor"
     }
   });
 });
 
 // Dev task
 gulp.task('dev', ['browserSync'], function() {
-  gulp.watch('./css/*.css', browserSync.reload);
-  gulp.watch('./*.html', browserSync.reload);
+    gulp.watch('./src/**/*', ['vendor']);
+    gulp.watch('./bower.json', ['deps']);
+    gulp.watch('./vendor/**/*', browserSync.reload);
 });
