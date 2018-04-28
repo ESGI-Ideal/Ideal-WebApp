@@ -1,6 +1,6 @@
 "use strict";
 const gulp = require('gulp');
-const mainBowerFiles = require('main-bower-files');
+const mainNpmFiles = require('npmfiles');
 //const nop = require('gulp-nop');
 const noop = require("gulp-noop");
 const plumber = require("gulp-plumber");
@@ -16,10 +16,7 @@ const options = require("minimist")(process.argv.slice(2));
 
 // Copy third party libraries from /node_modules into /vendor
 gulp.task('deps', function() {
-    return gulp.src(mainBowerFiles({
-        checkExistence: true,
-        env: (options.production && !options.development) ? "production" : "development"
-    }))
+    return gulp.src(mainNpmFiles())
         .pipe(!options.production ? plumber() : noop())
         //.pipe(sourcemaps.init({loadMaps: true}))
         .pipe(options.production ? ignore("*.map") : noop())

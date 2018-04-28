@@ -34,9 +34,11 @@
         "type": "git",
         "url": "https://github.com/ESGI-Ideal/Ideal-WebApp.git"
     },
-    "dependencies": {},
+    "dependencies": {
+        "bootstrap": "^4.1.0",
+        "jquery": "^3.3.1"
+    },
     "devDependencies": {
-        "bower": "^1.8.4",
         "browser-sync": "2.23.6",
         "del": "^3.0.0",
         "gulp": "^3.9.1",
@@ -48,6 +50,23 @@
         "gulp-preservetime": "^1.2.1",
         "gulp-sourcemaps": "^2.6.4",
         "main-bower-files": "^2.13.1",
-        "minimist": "^1.2.0"
+        "minimist": "^1.2.0",
+        "npmfiles": "^0.1.1"
+    },
+    "overrides": {
+        "jquery": {
+            "main": [
+                "dist/jquery.min.js",
+                "dist/jquery.min.map"
+            ]
+        },
+        "bootstrap": {
+            "main": [
+                "dist/js/bootstrap.bundle.min.js",
+                "dist/js/bootstrap.bundle.min.js.map",
+                "dist/css/bootstrap.min.css",
+                "dist/css/bootstrap.min.css.map"
+            ]
+        }
     }
 }
