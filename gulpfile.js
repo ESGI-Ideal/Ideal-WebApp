@@ -4,11 +4,14 @@ const mainNpmFiles = require('npmfiles');
 const plugins = require('gulp-load-plugins')(/*{DEBUG: true}*/);
 //nop/noop ; filter ;
 const del = require('del');
+//const once = require('async-once');
 const browserSync = require('browser-sync').create();
 const options = require("minimist")(process.argv.slice(2));
 
+const buildFolder = "vendor";
+
 /**
- * Copy third party libraries from /node_modules into /vendor
+ * Copy third party libraries from /node_modules into /{buildFolder}
  *
  * @task {build:deps}
  * @group {Building tasks}
@@ -22,11 +25,11 @@ gulp.task('build:deps', function() {
         //.pipe(3rd)
         //.pipe(plugins.sourcemaps.write())
         .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
-        .pipe(gulp.dest('./vendor/libs'));
+        .pipe(gulp.dest('./'+buildFolder+'/libs'));
 });
 
 /**
- * Copy source files from /src into /vendor
+ * Copy source files from /src into /{buildFolder}
  *
  * @task {build:src}
  * @group {Building tasks}
@@ -39,7 +42,7 @@ gulp.task('build:src', function() {
         //.pipe(3rd)
         .pipe(plugins.sourcemaps.write())
         .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
-        .pipe(gulp.dest('./vendor'))
+        .pipe(gulp.dest('./'+buildFolder))
         .pipe(plugins.preservetime());
 });
 //alias for legacy
@@ -55,18 +58,18 @@ gulp.task('vendor', ['build:src']);
  * @arg {development} If build for development (default)
  * @arg {production} If build for production environment
  */
-gulp.task('build', ['build:deps', 'build:src']);
+gulp.task('build', ['build:deps', 'build:src']); //gulp.series('', '')
 
 /**
  * For release
  *
  * @task {dist}
  */
-gulp.task('dist', ['build'], function() {
-    return gulp.src('./vendor/**/*')
-        .pipe(plugins.hashsum({dest: "vendor", force: true, hash: "md5"}))
-        .pipe(plugins.hashsum({dest: "vendor", force: true, hash: "sha1"}));
-});
+gulp.task('dist', gulp.series('clean', 'build', function() {
+    return gulp.src('./'+buildFolder+'/**/*')
+        .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "md5"}))
+        .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "sha1"}));
+}));
 
 // Default task
 gulp.task('default', ['help']);
@@ -93,8 +96,8 @@ gulp.task('help', function() {
  * @task {clean:build}
  * @group {Cleaning}
  */
-gulp.task('clean:build', function () {
-    return del(['./vendor']);
+gulp.task('clean:build', function() {
+    return del(['./'+buildFolder]);
 });
 
 /**
@@ -103,8 +106,8 @@ gulp.task('clean:build', function () {
  * @task {clean:build}
  * @group {Cleaning}
  */
-gulp.task('clean:dist', function () {
-    return del(['./dist']);
+gulp.task('clean:dist', function() { //once(function(done) {
+    return del(['./dist']/*, done*/);
 });
 
 /**
@@ -113,13 +116,13 @@ gulp.task('clean:dist', function () {
  * @task {clean:build}
  * @group {Cleaning}
  */
-gulp.task('clean', ['clean:build', 'clean:dist']);
+gulp.task('clean', gulp.parallel('clean:build', 'clean:dist'));
 
 // Configure the browserSync task
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: "./vendor"
+      baseDir: "./"+buildFolder
     }
   });
 });
@@ -131,8 +134,8 @@ gulp.task('browserSync', function() {
  * @task {dev}
  */
 // @group {Misc}
-gulp.task('dev', ['browserSync'], function() {
-    gulp.watch('./src/**/*', ['vendor']);
-    gulp.watch('./bower.json', ['deps']);
-    gulp.watch('./vendor/**/*', browserSync.reload);
-});
+gulp.task('dev', gulp.series('build', 'browserSync', function() {
+    gulp.watch('./src/**/*', ['build:src']);
+    gulp.watch('./bower.json', ['build:deps']);
+    gulp.watch('./'+buildFolder+'/**/*', browserSync.reload);
+}));
