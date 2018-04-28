@@ -29,10 +29,18 @@
     "bootstrap": "^4.1.0"
   },
   "overrides": {
+    "jquery": {
+      "main": [
+        "dist/jquery.min.js",
+        "dist/jquery.min.map"
+      ]
+    },
     "bootstrap" : {
       "main": [
-        "dist/js/bootstrap.js",
-        "dist/css/bootstrap.css"
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.min.js.map",
+        "dist/css/bootstrap.min.css",
+        "dist/css/bootstrap.min.css.map"
       ]
     }
   }

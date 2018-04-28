@@ -38,12 +38,15 @@
     "devDependencies": {
         "bower": "^1.8.4",
         "browser-sync": "2.23.6",
+        "del": "^3.0.0",
         "gulp": "^3.9.1",
         "gulp-debug": "^3.2.0",
         "gulp-hashsum": "^1.2.0",
+        "gulp-ignore": "^2.0.2",
         "gulp-noop": "^1.0.0",
         "gulp-plumber": "^1.2.0",
         "gulp-preservetime": "^1.2.1",
+        "gulp-sourcemaps": "^2.6.4",
         "main-bower-files": "^2.13.1",
         "minimist": "^1.2.0"
     }
