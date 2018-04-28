@@ -45,6 +45,7 @@
         "gulp-debug": "^3.2.0",
         "gulp-hashsum": "^1.2.0",
         "gulp-ignore": "^2.0.2",
+        "gulp-load-plugins": "^1.5.0",
         "gulp-noop": "^1.0.0",
         "gulp-plumber": "^1.2.0",
         "gulp-preservetime": "^1.2.1",

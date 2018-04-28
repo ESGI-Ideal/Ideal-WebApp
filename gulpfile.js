@@ -1,15 +1,8 @@
 "use strict";
 const gulp = require('gulp');
 const mainNpmFiles = require('npmfiles');
-//const nop = require('gulp-nop');
-const noop = require("gulp-noop");
-const plumber = require("gulp-plumber");
-const debug = require('gulp-debug');
-const preservetime = require('gulp-preservetime');
-const hashsum = require("gulp-hashsum");
-const sourcemaps = require('gulp-sourcemaps');
-//const filter = require('gulp-filter');
-const ignore = require('gulp-ignore');
+const plugins = require('gulp-load-plugins')();
+//nop/noop ; filter ;
 const del = require('del');
 const browserSync = require('browser-sync').create();
 const options = require("minimist")(process.argv.slice(2));
@@ -17,27 +10,27 @@ const options = require("minimist")(process.argv.slice(2));
 // Copy third party libraries from /node_modules into /vendor
 gulp.task('deps', function() {
     return gulp.src(mainNpmFiles())
-        .pipe(!options.production ? plumber() : noop())
-        //.pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(options.production ? ignore("*.map") : noop())
-        .pipe(debug({title: 'deps-debug'/*, showFiles: false*/}))
+        .pipe(!options.production ? plugins.plumber() : plugins.noop())
+        //.pipe(plugins.sourcemaps.init({loadMaps: true}))
+        .pipe(options.production ? plugins.ignore("*.map") : plugins.noop())
+        .pipe(plugins.debug({title: 'deps-debug'/*, showFiles: false*/}))
         //.pipe(3rd)
-        //.pipe(sourcemaps.write())
-        .pipe(!options.production ? plumber.stop() : noop())
+        //.pipe(plugins.sourcemaps.write())
+        .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
         .pipe(gulp.dest('./vendor/libs'));
 });
 
 // Copy source files from /src into /vendor
 gulp.task('build', function() {
     gulp.src('./src/**/*')
-        .pipe(!options.production ? plumber() : noop())
-        .pipe(debug({title: 'src-debug'}))
-        .pipe(sourcemaps.init())
+        .pipe(!options.production ? plugins.plumber() : plugins.noop())
+        .pipe(plugins.debug({title: 'src-debug'}))
+        .pipe(plugins.sourcemaps.init())
         //.pipe(3rd)
-        .pipe(sourcemaps.write())
-        .pipe(!options.production ? plumber.stop() : noop())
+        .pipe(plugins.sourcemaps.write())
+        .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
         .pipe(gulp.dest('./vendor'))
-        .pipe(preservetime());
+        .pipe(plugins.preservetime());
 });
 //alias for legacy
 gulp.task('vendor', ['build']);
@@ -48,8 +41,8 @@ gulp.task('default', ['vendor', 'deps']);
 //for release
 gulp.task('dist', ['deps', 'build'], function() {
     return gulp.src('./vendor/**/*')
-        .pipe(hashsum({dest: "vendor", force: true, hash: "md5"}))
-        .pipe(hashsum({dest: "vendor", force: true, hash: "sha1"}));
+        .pipe(plugins.hashsum({dest: "vendor", force: true, hash: "md5"}))
+        .pipe(plugins.hashsum({dest: "vendor", force: true, hash: "sha1"}));
 });
 
 //cleaning project dir
