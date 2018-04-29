@@ -30,7 +30,7 @@
     "scripts": {
         "build": "./node_modules/.bin/gulp build",
         "help": "gulp help",
-        "ci": "./node_modules/.bin/gulp clean dist --series --production"
+        "ci": "./node_modules/.bin/gulp --series clean dist --production"
     },
     "repository": {
         "type": "git",
@@ -45,13 +45,19 @@
         "del": "^3.0.0",
         "gulp": "^4.0.0",
         "gulp-debug": "^3.2.0",
+        "gulp-dedupe": "0.0.2",
+        "gulp-gzip": "^1.4.2",
         "gulp-hashsum": "^1.2.0",
         "gulp-ignore": "^2.0.2",
         "gulp-load-plugins": "^1.5.0",
+        "gulp-mirror": "^1.0.0",
         "gulp-noop": "^1.0.0",
         "gulp-plumber": "^1.2.0",
         "gulp-preservetime": "^1.2.1",
         "gulp-sourcemaps": "^2.6.4",
+        "gulp-tar": "^2.1.0",
+        "gulp-zip": "^4.1.0",
+        "lazypipe": "^1.0.1",
         "main-bower-files": "^2.13.1",
         "minimist": "^1.2.0",
         "npmfiles": "^0.1.1"

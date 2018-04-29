@@ -2,6 +2,7 @@
 const gulp = require('gulp');
 const mainNpmFiles = require('npmfiles');
 const plugins = require('gulp-load-plugins')(/*{DEBUG: true}*/);
+const lazypipe = require('lazypipe');
 //nop/noop ; filter ;
 const del = require('del');
 //const once = require('async-once');
@@ -68,8 +69,18 @@ gulp.task(gfn('clean', gulp.parallel('clean:build', 'clean:dist'), 'Full clean')
 
 gulp.task(gfn('dist', gulp.series('clean', 'build', function dist() {
         return gulp.src('./'+buildFolder+'/**/*')
-            .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "md5"}))
-            .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "sha1"}));
+            .pipe(plugins.mirror(
+                plugins.hashsum({/*dest: "dist", force: true,*/ stream: true, hash: "md5"}),
+                plugins.hashsum({/*dest: "dist", force: true,*/ stream: true, hash: "sha1"})
+            ))
+            .pipe(plugins.dedupe())
+            .pipe(plugins.debug({title: 'dist-todo'}))
+            .pipe(plugins.mirror(
+                plugins.zip("ideal-webapp-dist.zip"),
+                lazypipe().pipe(plugins.tar, "ideal-webapp-dist.tar").pipe(plugins.gzip)()
+            ))
+            .pipe(plugins.debug({title: 'dist-debug'}))
+            .pipe(gulp.dest("dist"));
     }),
     'For release'));
 
