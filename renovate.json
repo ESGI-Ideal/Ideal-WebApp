@@ -1,5 +1,16 @@
 {
   "extends": [
-    "config:base"
-  ]
+    ":enableRenovate",
+    ":npm",
+    "config:base",
+    ":preserveSemverRanges",
+    ":maintainLockFilesMonthly",
+    "schedule:monthly",
+    ":semanticCommits",
+    ":prNotPending",
+    ":labels(bot, renovate)"
+  ],
+  "baseBranches": ["master", "develop"],
+  "supportPolicy": ["lts_latest", "current"],
+  "bumpVersion": "patch"
 }
