@@ -12,6 +12,7 @@
 [![GitHub release](https://img.shields.io/github/release/ESGI-Ideal/Ideal-WebApp.svg?style=flat-square)](https://github.com/ESGI-Ideal/Ideal-WebApp/releases)
 
 [![Build Status](https://travis-ci.org/ESGI-Ideal/Ideal-WebApp.svg?branch=master)](https://travis-ci.org/ESGI-Ideal/Ideal-WebApp)
+[![CircleCI](https://circleci.com/gh/ESGI-Ideal/Ideal-WebApp.svg?style=svg)](https://circleci.com/gh/ESGI-Ideal/Ideal-WebApp)
 ![GitHub package version](https://img.shields.io/github/package-json/v/ESGI-Ideal/Ideal-WebApp.svg?style=flat-square)
 [![dependencies Status](https://david-dm.org/ESGI-Ideal/Ideal-WebApp.svg)](https://david-dm.org/ESGI-Ideal/Ideal-WebApp)
 [![devDependencies Status](https://david-dm.org/ESGI-Ideal/Ideal-WebApp/dev-status.svg)](https://david-dm.org/ESGI-Ideal/Ideal-WebApp?type=dev)
