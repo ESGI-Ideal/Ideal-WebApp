@@ -30,7 +30,7 @@
     "scripts": {
         "build": "./node_modules/.bin/gulp build",
         "help": "gulp help",
-        "ci": "./node_modules/.bin/gulp --series clean dist --production"
+        "ci": "./node_modules/.bin/gulp clean dist --series --production"
     },
     "repository": {
         "type": "git",
