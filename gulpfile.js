@@ -10,6 +10,17 @@ const browserSync = require('browser-sync').create();
 const options = require("minimist")(process.argv.slice(2));
 
 const buildFolder = "vendor";
+/* verify coherence of parameters */
+options.production = !(!options.production); //init or convert to boolean
+options.development = !(!options.development); //init or convert to boolean
+if(options.production && options.development) //priority
+    options.development = false;
+else if(!options.production && !options.development) { //cmd priority on env
+    options.development = !process.env.NODE_ENV; //default value if not defined
+    options.production = !options.development;
+}
+console.log("ENV production = " + options.production);
+console.log("ENV development = " + options.development);
 
 function gfn(_name, fn, _description, _flags) {
     if(_name) fn.displayName = fn.taskName = _name;
@@ -40,8 +51,8 @@ gulp.task(gfn('build:src', function build_src() {
             .pipe(plugins.sourcemaps.write())
             .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
             .pipe(gulp.dest('./'+buildFolder))
-            .pipe(plugins.debug({title: 'dest-debug'}));
-        //.pipe(plugins.preservetime());
+            .pipe(plugins.debug({title: 'dest-debug'}))
+            .pipe(plugins.preservetime());
     },
     'Copy source files from /src into /{buildFolder}'));
 
