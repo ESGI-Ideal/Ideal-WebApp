@@ -33,7 +33,7 @@ After downloading, simply edit the HTML and CSS files included in `src` folder i
 After installation, run `npm install` and then run `gulp dev` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
 
 ### Others Usage
-You can else run `gulp tasks` to see all tasks availables or `gulp help` to get details on each task.
+You can else run `gulp --tasks` to see all tasks availables and get details on each task.
 
 
 ## About

@@ -10,132 +10,88 @@ const options = require("minimist")(process.argv.slice(2));
 
 const buildFolder = "vendor";
 
-/**
- * Copy third party libraries from /node_modules into /{buildFolder}
- *
- * @task {build:deps}
- * @group {Building tasks}
- */
-gulp.task('build:deps', function() {
-    return gulp.src(mainNpmFiles())
-        .pipe(!options.production ? plugins.plumber() : plugins.noop())
-        //.pipe(plugins.sourcemaps.init({loadMaps: true}))
-        .pipe(options.production ? plugins.ignore("*.map") : plugins.noop())
-        .pipe(plugins.debug({title: 'deps-debug'/*, showFiles: false*/}))
-        //.pipe(3rd)
-        //.pipe(plugins.sourcemaps.write())
-        .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
-        .pipe(gulp.dest('./'+buildFolder+'/libs'));
-});
+function gfn(_name, fn, _description, _flags) {
+    if(_name) fn.displayName = fn.taskName = _name;
+    if(_description) fn.description = _description;
+    if(_flags) fn.flags = _flags;
+    return fn;
+}
 
-/**
- * Copy source files from /src into /{buildFolder}
- *
- * @task {build:src}
- * @group {Building tasks}
- */
-gulp.task('build:src', function() {
-    gulp.src('./src/**/*')
-        .pipe(!options.production ? plugins.plumber() : plugins.noop())
-        .pipe(plugins.debug({title: 'src-debug'}))
-        .pipe(plugins.sourcemaps.init())
-        //.pipe(3rd)
-        .pipe(plugins.sourcemaps.write())
-        .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
-        .pipe(gulp.dest('./'+buildFolder))
-        .pipe(plugins.preservetime());
-});
-//alias for legacy
-gulp.task('vendor', ['build:src']);
+gulp.task(gfn('build:deps', function build_deps() {
+        return gulp.src(mainNpmFiles())
+            .pipe(!options.production ? plugins.plumber() : plugins.noop())
+            //.pipe(plugins.sourcemaps.init({loadMaps: true}))
+            .pipe(options.production ? plugins.ignore("*.map") : plugins.noop())
+            .pipe(plugins.debug({title: 'deps-debug'/*, showFiles: false*/}))
+            //.pipe(3rd)
+            //.pipe(plugins.sourcemaps.write())
+            .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
+            .pipe(gulp.dest(buildFolder+'/libs'));
+    },
+    'Copy third party libraries from /node_modules into /{buildFolder}'));
 
-/**
- * Builds entire project.
- * Define environment in NODE_ENV env or by argument.
- *
- * @task {build}
- * @group {Building tasks}
- * @order {1}
- * @arg {development} If build for development (default)
- * @arg {production} If build for production environment
- */
-gulp.task('build', ['build:deps', 'build:src']); //gulp.series('', '')
+gulp.task(gfn('build:src', function build_src() {
+        return gulp.src('./src/**/*')
+            .pipe(!options.production ? plugins.plumber() : plugins.noop())
+            .pipe(plugins.debug({title: 'src-debug'}))
+            .pipe(plugins.sourcemaps.init())
+            //.pipe(3rd)
+            .pipe(plugins.sourcemaps.write())
+            .pipe(!options.production ? plugins.plumber.stop() : plugins.noop())
+            .pipe(gulp.dest('./'+buildFolder))
+            .pipe(plugins.debug({title: 'dest-debug'}));
+        //.pipe(plugins.preservetime());
+    },
+    'Copy source files from /src into /{buildFolder}'));
 
-/**
- * For release
- *
- * @task {dist}
- */
-gulp.task('dist', gulp.series('clean', 'build', function() {
-    return gulp.src('./'+buildFolder+'/**/*')
-        .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "md5"}))
-        .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "sha1"}));
+gulp.task(gfn('vendor', gulp.parallel('build:src'), 'Alias for legacy'));
+
+gulp.task(gfn('build', gulp.series('build:deps', 'build:src'), 'Builds entire project.\nDefine environment in NODE_ENV env or by argument.', {
+    '--development': 'If build for development (default)',
+    '--production': 'If build for production environment'
 }));
 
 // Default task
-gulp.task('default', ['help']);
+//gulp.task('default', plugins.taskListing); //TODO: find how show --tasks of gulp-cli
 
-/**
- * List all Gulp's tasks
- * @task {tasks}
- * @group {Help}
- */
-gulp.task('tasks', plugins.taskListing);
+gulp.task(gfn('clean:build', function clean_build() {
+        return del(['./'+buildFolder]);
+    },
+    'Delete dev build folder'));
 
-/**
- * Display this help
- * @task {help}
- * @group {Help}
- */
-gulp.task('help', function() {
-    return plugins.helpDoc(gulp);
-});
+gulp.task(gfn('clean:dist', function clean_dist() { //once(function(done) {
+        return del(['./dist']/*, done*/);
+    },
+    'Delete release folder'));
 
-/**
- * Delete dev build folder
- *
- * @task {clean:build}
- * @group {Cleaning}
- */
-gulp.task('clean:build', function() {
-    return del(['./'+buildFolder]);
-});
+gulp.task(gfn('clean', gulp.parallel('clean:build', 'clean:dist'), 'Full clean'));
 
-/**
- * Delete release folder
- *
- * @task {clean:build}
- * @group {Cleaning}
- */
-gulp.task('clean:dist', function() { //once(function(done) {
-    return del(['./dist']/*, done*/);
-});
-
-/**
- * Full clean
- *
- * @task {clean:build}
- * @group {Cleaning}
- */
-gulp.task('clean', gulp.parallel('clean:build', 'clean:dist'));
+gulp.task(gfn('dist', gulp.series('clean', 'build', function dist() {
+        return gulp.src('./'+buildFolder+'/**/*')
+            .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "md5"}))
+            .pipe(plugins.hashsum({dest: buildFolder, force: true, hash: "sha1"}));
+    }),
+    'For release'));
 
 // Configure the browserSync task
-gulp.task('browserSync', function() {
-  browserSync.init({
-    server: {
-      baseDir: "./"+buildFolder
-    }
-  });
+gulp.task('browserSync', function browserSync() {
+    return browserSync.init({
+        server: {
+            baseDir: "./"+buildFolder
+        }
+    });
 });
 
-/**
- * Dev task
- * While open the website in the navigator and refresh each time sources were modified
- *
- * @task {dev}
+gulp.task(gfn('dev', gulp.series('build', 'browserSync', function dev(done) {
+        gulp.watch('./src/**/*', ['build:src']);
+        gulp.watch('./bower.json', ['build:deps']);
+        gulp.watch('./'+buildFolder+'/**/*', browserSync.reload);
+        done();
+    }),
+    'Dev task\nWhile open the website in the navigator and refresh each time sources were modified'));
+
+
+/*
+const util = require('util');
+console.warn(util.inspect());
  */
-// @group {Misc}
-gulp.task('dev', gulp.series('build', 'browserSync', function() {
-    gulp.watch('./src/**/*', ['build:src']);
-    gulp.watch('./bower.json', ['build:deps']);
-    gulp.watch('./'+buildFolder+'/**/*', browserSync.reload);
-}));
