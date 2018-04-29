@@ -1,0 +1,67 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.11.1
+    working_directory: ~/repo
+    steps:
+      - checkout
+      #- run:
+      #    name: Update npm
+      #    command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          keys:
+          #- v1-dependencies-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ .Branch }}
+          - v1-dependencies-
+      - run: npm ci --only=dev
+      #- run:
+      #    command: |
+      #      mkdir -p ~/reports
+      #      eslint ./src/ --format junit --output-file ~/reports/eslint.xml
+      #    when: always
+      #- store_test_results:
+      #    path: ~/reports
+      #- store_artifacts:
+      #    path: ~/reports
+      - save_cache:
+          paths:
+            - ~/.npm
+            #- node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+  #test:
+  #  docker:
+  #    - image: circleci/node:9.11.1
+  #  working_directory: ~/repo
+  #  steps:
+  #    - checkout
+  #    - run:
+  #        name: Test
+  #        command: npm test
+  #    - run:
+  #        name: Generate code coverage
+  #        command: './node_modules/.bin/nyc report --reporter=text-lcov'
+  #    - store_artifacts:
+  #        path: test-results.xml
+  #        prefix: tests
+  #    - store_artifacts:
+  #        path: coverage
+  #        prefix: coverage
+  #    - store_test_results:
+  #        path: test-results.xml
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      #- test
+      #    requires:
+      #      - build
+      #    filters:
+      #      branches:
+      #        only: master
+      #- publish:
+      #    filters:
+      #      tags:
+      #        only: /v[0-9]+(\.[0-9]+)*/
