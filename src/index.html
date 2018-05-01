@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IDeal Homepage</title>
+
+    <link href="vendor/css/custom.css" rel="stylesheet">
+    <link href="vendor/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="vendor/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="vendor/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+
+    <script src="vendor/i18next/i18next.min.js"></script>
+
+    <script src="vendor/js/custom.js"></script>
+    <script src="vendor/js/translate.js"></script>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#" id="goArticle">IDEAL</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuFilter">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkStore" value="store">
+                                <label class="dropdown-item form-check-label tradAvailable" for="checkStore">Available in store</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkFavorite" value="favorite">
+                                <label class="dropdown-item form-check-label tradFavorite" for="checkFavorite">Favorite</label>
+                            </div>
+
+                            <div class="dropdown-header tradOrder">Order by</div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="orderPrice" name="orderRadio" value="price">
+                                <label class="dropdown-item form-check-label tradPrice" for="orderPrice">Price</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="orderAdditionDate" name="orderRadio" value="additionDate">
+                                <label class="dropdown-item form-check-label tradAdditionDate" for="orderAdditionDate">Addition date</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="orderlike" name="orderRadio" value="like">
+                                <label class="dropdown-item form-check-label tradLikeDislike" for="orderlike">like</label>
+                            </div>
+
+                            <div class="dropdown-header tradSort">Sort by</div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="sortGrowing" name="sortRadio" value="growing">
+                                <label class="dropdown-item form-check-label tradAsc" for="sortGrowing">Addition date</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="sortDecreasing" name="sortRadio" value="decreasing">
+                                <label class="dropdown-item form-check-label tradDesc" for="sortDecreasing">like</label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loghan</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
+                            <div class="dropdown-item tradUserSetting" id="goUser">Account setting</div>
+                            <div class="dropdown-item tradFavorite" id="goFavorite">Favorite</div>
+                            <div class="dropdown-item tradLogout" id="logout">Logout</div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link tradConnect" data-toggle="modal" data-target="#loginModal" id="connect" >Connexion</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link tradPartner" id="goPartner">Our partners</a><!-- href="#"-->
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link tradContact" data-toggle="modal" data-target="#contactModal" id="goContact" >Contact us</a>
+                </li>
+
+                <li class="nav-item">
+                    <select class="form-control form-control-sm " id="selectLanguage">
+                        <option value="en-US">English</option>
+                        <option value="fr-FR">Français</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title textBold tradLogin" >Login to your account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputMail" class="tradMail">Email</label>
+                            <input type="email" class="form-control" id="inputMail" placeholder="email@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" id="inputPasswordLabel" class="tradPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="********">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label tradRemember" for="rememberMe" id="rememberMeLabel">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <small class="form-text text-muted">
+                            <a href="" class="tradRegister" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Register</a>
+                        </small>
+                        <button type="button" class="btn btn-secondary tradCancel" data-dismiss="modal" id="cancelButton">Cancel</button>
+                        <button type="button" class="btn btn-primary tradConnect" id="loginButton">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title textBold tradCreateAccount" id="registerModalLabel">Create to your account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="registerForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputMailSignUp" class="tradMail">Email</label>
+                            <input type="email" class="form-control" id="inputMailSignUp" value="" placeholder="email@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUsername" class="tradUsername">Username</label>
+                            <input type="text" class="form-control" id="inputUsername" value="" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBirth" class="tradBirth">Date of birth</label>
+                            <input type="date" class="form-control" id="inputBirth" value="" placeholder="01/01/2000">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordSignUp" class="tradPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPasswordSignUp" value="" placeholder="********" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputConfirmPasswordSignUp" class="tradConfirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="inputConfirmPasswordSignUp" value="" placeholder="********" required>
+                            <div class="invalid-feedback tradConfirmPasswordError" id="passwordFeeback">
+                                <!-- display if password is not same -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary tradCancel" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary tradRegister" id="registerNow">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article page -->
+    <div id="articlePage">
+        <div class="row my-4">
+            <!--<div class="col-lg-3">
+                <!-- Filter --
+                <h1 class="alignCenter tradFilter">Filter</h1>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkStore" value="store">
+                        <label class="form-check-label tradAvailable" for="checkStore">Available in store</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkFavorite" value="favorite">
+                        <label class="form-check-label tradFavorite" for="checkFavorite">Favorite</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control form-control-sm" id="selectFormOrder">
+                        <optgroup class="tradOrder" label="Order by">
+                            <option class="tradPrice" value="price">Price</option>
+                            <option class="tradAdditionDate" value="addition_date">Addition date</option>
+                            <option class="tradLikeDislike" value="like">Like / Dislike</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control form-control-sm" id="selectFormSort">
+                        <optgroup class="tradSort" label="Sort by">
+                            <option class="tradAsc" value="growing">Growing</option>
+                            <option class="tradDesc" value="decreasing">Decreasing</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <!-- Ads --
+                <img src="http://placehold.it/300x200">
+            </div>-->
+
+            <div class="col-lg-12">
+                <!-- Ads -->
+                <div id="carouselAdsIndicatorsTop" class="carousel slide mb-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselAdsIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselAdsIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselAdsIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="http://placehold.it/900x100" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="http://placehold.it/900x100" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="http://placehold.it/900x100" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselAdsIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselAdsIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+
+
+                <!-- List offer -->
+                <div class="row" id="listOffer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User page -->
+    <div id="userPage">
+        <form>
+            <div class="row my-4">
+                <div class="col-lg-2">
+                    <img class="img-profil" src="vendor/img/profilPicture.png" alt="">
+                </div>
+                <div class="col-lg-10">
+                    <div class="form-group">
+                        <label for="inputMailSignUp">Email</label>
+                        <input type="email" class="form-control" id="inputMailSetting" value="" placeholder="loghan.r@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUsername">Username</label>
+                        <input type="text" class="form-control" id="inputUsernameSetting" value="" placeholder="Loghan RAMASSAMY">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBirthSetting">Date of birth</label>
+                        <input type="date" class="form-control" id="inputBirthSetting" value="1994-03-01">
+                    </div>
+                    <button type="button" class="btn btn-primary alignRight" id="updateUser">Update</button>
+                    <button type="button" class="btn btn-secondary alignRight">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Partner page -->
+    <div id="partnerPage">
+        <div class="my-4">
+            <h3 class="alignCenter tradPartner">Our partner</h3>
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+        </div>
+    </div>
+
+    <!-- Favorite page -->
+    <div id="favoritePage">
+        <div class="my-4">
+            <h3 class="alignCenter">Favorite</h3>
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+            <img class="col-lg-1" src="vendor/img/profilPicture.png" alt="">
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title textBold tradContact" id="contactModalLabel">Contact us</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row alignCenter">
+                        <h5 class="col-lg-12">4 rue Émile Blin, 94200 IVRY-SUR-SEINE, FRANCE</h5>
+                        <h5 class="col-lg-12">loghan.r@gmail.com / tristan.c@gmail.com</h5>
+                        <h5 class="col-lg-12">+33 (0) 768 329 294</h5>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-3 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; IDeal 2018</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
