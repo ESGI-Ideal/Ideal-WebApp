@@ -104,9 +104,16 @@ gulp.task('browserSync', function browserSync() {
     });
 });
 
+gulp.task(gfn('sync', gulp.series('build', function sync(done) {
+        gulp.watch('./src/**/*', gulp.series('build:src'));
+        gulp.watch('./package.json', gulp.series('build:deps'));
+        done();
+    }),
+    'Dev task\nRefresh each time sources were modified'));
+
 gulp.task(gfn('dev', gulp.series('build', 'browserSync', function dev(done) {
         gulp.watch('./src/**/*', ['build:src']);
-        gulp.watch('./bower.json', ['build:deps']);
+        gulp.watch('./package.json', ['build:deps']);
         gulp.watch('./'+buildFolder+'/**/*', browserSync.reload);
         done();
     }),

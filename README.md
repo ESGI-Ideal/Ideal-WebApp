@@ -39,6 +39,13 @@ After installation, run `npm install` and then run `gulp dev` which will open up
 You can else run `gulp --tasks` to see all tasks availables and get details on each task.
 
 
+## Dev usage
+While developing, for keeping `vendor/*` up-to-date whith sources, there a Gulp tasks :
+```bash
+gulp sync
+```
+
+
 ## About
 
 Ideal Shop is a school project.
