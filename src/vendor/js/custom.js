@@ -1,12 +1,14 @@
-var divArray = ['#articlePage', '#userPage', '#favoritePage', '#partnerPage']; //Don't forget add DIV in custom.css
+var divArray = ['#articlePage', '#userPage', '#favoritePage', '#partnerPage', '#administrationPage', '#addOfferPage']; //Don't forget add DIV in custom.css
 
 $(function(){
     /*$('#inputConfirmPasswordSignUp').change(function() {
         var aBool = isValidatePassword();
     });*/
 
-    //initArticleJson("http://localhost:8888/article");
-    getToken('user@mail.com', 'password');
+    initArticleJson("http://localhost:8888/article");
+    initTableUserJson("http://localhost:8888/user");
+    initTableArticleJson("http://localhost:8888/article");
+
 
     $('#goUser').click(function() {
         showDiv(divArray, '#userPage');
@@ -24,9 +26,20 @@ $(function(){
         showDiv(divArray, '#partnerPage');
     });
 
+    $('#goAdministration').click(function() {
+        showDiv(divArray, '#administrationPage');
+    });
+
+    $('#goAddOffer').click(function() {
+        showDiv(divArray, '#addOfferPage');
+    });
+
+    //getToken('user@mail.com', 'password');
     $('#loginButtonTest').click(function() {
         alert("Je lance la function");
+        //var loginData = $("#userSignup").serialize();
         getToken('user@mail.com', 'password');
+        alert("J'ai terminé la function");
     });
 
 
@@ -81,6 +94,35 @@ function initArticleJson(url){
     );
 }
 
+function initTableUserJson(url){
+    $.support.cors = true;
+    $.getJSON(
+        url,
+        function(data){
+            if (data.length > 1) {
+                //alert(data.length);
+                $.each(data, function (key, val) {
+                    //alert(val.mail);
+                    $( "<tr/>", { html: lineOfUserTableHTML(val.id, val.mail, val.password, val.psw_hash, val.inscription, val.admin) } ).appendTo( '#userTable' );
+                });
+            }
+        }
+    );
+}
+
+function initTableArticleJson(url){
+    $.support.cors = true;
+    $.getJSON(
+        url,
+        function(data){
+            if (data.length > 1) {
+                $.each(data, function (key, val) {
+                    $( "<tr/>", { html: lineOfOfferTableHTML(val.id, val.name, val.created, val.updated, val.description, val.price) } ).appendTo( '#offerTable' );
+                });
+            }
+        }
+    );
+}
 
 
 //{"id":1,"name":"LaveTout","created":null,"updated":null,"description":null,"price":null}
@@ -154,4 +196,42 @@ function cutStringBeginingToIndex(myString, myIndex){
     var blankPos = myString.indexOf(' ', myIndex);
     myString = myString.substring(0, blankPos-1) + "(...)";
     return myString;
+}
+
+function lineOfUserTableHTML (id, username, password, password_hash, inscription, admin){
+    if(username === null) username = "User name";
+    if(password === null) password = "010203";
+    if(password_hash === null) password_hash = "false";
+    if(inscription === null) inscription = "01/01/2000";
+    if(admin === null) admin = "false";
+
+    return(
+        "<th scope='row'>" + id + "</th>"+
+        "<td>" + username + "</td>"+
+        "<td>" + password + "</td>"+
+        "<td>" + password_hash + "</td>"+
+        "<td>" + inscription + "</td>"+
+        "<td>the/picture/url</td>"+
+        "<td>" + admin + "</td>"+
+        "<td>...</td>");
+}
+
+function lineOfOfferTableHTML (id, name, created, updated, description, price){
+    if(name === null) name = "Item inconnu";
+    if(created === null) created = "01/01/2000";
+    if(updated === null) updated = "01/01/2000";
+    if(description === null) description = "No description...";
+    if(price === null) price = "24.99";
+
+    var brefDescription = description.length > 70 ? cutStringBeginingToIndex(description, 80) : description;
+
+    return(
+        "<th scope='row'>" + id + "</th>"+
+        "<td>" + name + "</td>"+
+        "<td>" + created + "</td>"+
+        "<td>" + updated + "</td>"+
+        "<td>" + brefDescription + "</td>"+
+        "<td>" + price + "</td>"+
+        "<td>the/picture/url</td>"+
+        "<td>...</td>");
 }

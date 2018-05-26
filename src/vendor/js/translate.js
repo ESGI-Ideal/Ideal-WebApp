@@ -28,6 +28,7 @@ i18next.init({
 			    "tradAbout": "About",
 			    "tradMail": "Email",
 			    "tradUsername": "Username",
+                "tradName": "Name",
 			    "tradPassword": "Password",
 			    "tradConfirmPassword": "Confirm password",
 			    "tradConfirmPasswordError": "Password is not same.",
@@ -49,7 +50,11 @@ i18next.init({
 				"tradPartner": "Our partners",
                 "tradContact": "Contact us",
                 "tradOrder" : "Order by",
-                "tradSort" : "Sort by"
+                "tradSort" : "Sort by",
+                "tradAddOffer" : "Add offer",
+                "tradAdministration" : "Administration",
+                "tradAdd" : "Add",
+                "tradUpdate" : "Update"
 		    }
 		},
 		"fr-FR": {
@@ -61,6 +66,7 @@ i18next.init({
 			    "tradAbout": "A propos de nous",
 			    "tradMail": "Email",
 			    "tradUsername": "Nom d'utilisateur",
+                "tradName": "Nom",
 			    "tradPassword": "Mot de passe",
 			    "tradConfirmPassword": "Confirmer le mot de passe",
 			    "tradConfirmPasswordError": "Les mots de passe ne sont pas identiques.",
@@ -82,7 +88,11 @@ i18next.init({
                 "tradPartner": "Nos partenaires",
                 "tradContact": "Nous contacter",
                 "tradOrder" : "Trier par",
-                "tradSort" : "Sens du trie"
+                "tradSort" : "Sens du trie",
+				"tradAddOffer" : "Ajouter une offre",
+                "tradAdministration" : "Administration",
+                "tradAdd" : "Ajouter",
+                "tradUpdate" : "Mise à jour"
 		    }
 		}
 	}
@@ -97,6 +107,7 @@ function updateContent() {
     $('.tradAbout').text(i18next.t('tradAbout'));
     $('.tradMail').text(i18next.t('tradMail'));
     $('.tradUsername').text(i18next.t('tradUsername'));
+    $('.tradName').text(i18next.t('tradName'));
     $('.tradPassword').text(i18next.t('tradPassword'));
     $('.tradConfirmPassword').text(i18next.t('tradConfirmPassword'));
     $('.tradConfirmPasswordError').text(i18next.t('tradConfirmPasswordError'));
@@ -118,7 +129,10 @@ function updateContent() {
     $('.tradPartner').text(i18next.t('tradPartner'));
     $('.tradContact').text(i18next.t('tradContact'));
     $('.tradOrder').text(i18next.t('tradOrder'));
-    $('.tradSort').text(i18next.t('tradSort')); //.prop.('label', i18next.t('tradSort'));
+    $('.tradAddOffer').text(i18next.t('tradAddOffer')); //.prop.('label', i18next.t('tradSort'));
+    $('.tradAdministration').text(i18next.t('tradAdministration'));
+    $('.tradAdd').text(i18next.t('tradAdd'));
+    $('.tradUpdate').text(i18next.t('tradUpdate'));
 
 }
 
