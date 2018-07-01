@@ -2,7 +2,7 @@
     "title": "Ideal Shop Website",
     "name": "ideal-shop-web",
     "description": "A shop who search and compare for you",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "Ideal Shop",
         "shop",
@@ -44,7 +44,7 @@
         "browser-sync": "2.23.6",
         "del": "^3.0.0",
         "gulp": "^4.0.0",
-        "gulp-debug": "^3.2.0",
+        "gulp-debug": "^4.0.0",
         "gulp-dedupe": "0.0.2",
         "gulp-gzip": "^1.4.2",
         "gulp-hashsum": "^1.2.0",
