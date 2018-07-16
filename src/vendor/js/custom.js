@@ -1,13 +1,16 @@
 var divArray = ['#articlePage', '#userPage', '#favoritePage', '#partnerPage', '#administrationPage', '#addOfferPage']; //Don't forget add DIV in custom.css
+var urlServer = "http://78.192.12.79:18080";
+var urlArticle = urlServer + "/article";
+var urlUser = urlServer + "/user";
 
 $(function(){
     /*$('#inputConfirmPasswordSignUp').change(function() {
         var aBool = isValidatePassword();
     });*/
 
-    initArticleJson("http://localhost:8888/article");
-    initTableUserJson("http://localhost:8888/user");
-    initTableArticleJson("http://localhost:8888/article");
+    initArticleJson();
+    initTableUserJson();
+    initTableArticleJson();
 
 
     $('#goUser').click(function() {
@@ -47,9 +50,35 @@ $(function(){
         alert("J'ai terminé la function");
     });
 
+    $('#btnAddOffer').click(function() {
+        alert("Je lance la function");
+        //alert($("#articleName").val(), $("#articleDescription").val(), $("#articlePrice").val());
+        addArticle($("#articleName").val(), $("#articleDescription").val(), $("#articlePrice").val());
+        alert("J'ai terminé la function");
+    });
+
 
 });
 
+function addArticle(articleName, description, price) {
+    console.log(articleName);
+    console.log(description);
+    console.log(parseFloat(price));
+    price = parseFloat(price);
+    $.support.cors = true;
+    $.ajax(
+        {
+            contentType: 'application/json',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify ({name : 'Test', img : 0, description : 'Testons', price : 100.5}),
+            url: urlArticle,
+            error: (xhr, status, error) => { alert("ERROR");/* var errorMessage = xhr.responseJSON.message */ }
+
+        }).done((json) => { alert("OKK");/*S'exécute en cas de succès de la requête*/ });
+}
+//application/json
+//contentType: 'application/json',
 function showDiv(arrayOfDiv, idDiv) {
     for (var id in arrayOfDiv) {
         if (arrayOfDiv[id] === idDiv) { $(arrayOfDiv[id]).show(); }
@@ -85,10 +114,10 @@ function isValidPassword() {
     return false;
 }
 
-function initArticleJson(url){
+function initArticleJson(){
     $.support.cors = true;
     $.getJSON(
-        url,
+        urlArticle,
         function(data){
             if (data.length > 1) {
                 $.each(data, function (key, val) {
@@ -99,10 +128,10 @@ function initArticleJson(url){
     );
 }
 
-function initTableUserJson(url){
+function initTableUserJson(){
     $.support.cors = true;
     $.getJSON(
-        url,
+        urlUser,
         function(data){
             if (data.length > 1) {
                 //alert(data.length);
@@ -115,10 +144,10 @@ function initTableUserJson(url){
     );
 }
 
-function initTableArticleJson(url){
+function initTableArticleJson(){
     $.support.cors = true;
     $.getJSON(
-        url,
+        urlArticle,
         function(data){
             if (data.length > 1) {
                 $.each(data, function (key, val) {

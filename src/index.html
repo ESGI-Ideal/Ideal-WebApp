@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>IDeal Homepage</title>
+    <link rel="icon" href="vendor/img/ideal-logo.png" />
 
     <link href="vendor/css/custom.css" rel="stylesheet">
     <link href="vendor/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +28,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#" id="goArticle">IDEAL</a>
+        <a class="navbar-brand" href="#" id="goArticle"><img src="vendor/img/ideal-logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -134,10 +135,6 @@
                             <label for="inputPassword" id="inputPasswordLabel" class="tradPassword">Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder="********">
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label tradRemember" for="rememberMe" id="rememberMeLabel">Remember me</label>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <small class="form-text text-muted">
@@ -168,14 +165,6 @@
                             <input type="email" class="form-control" id="inputMailSignUp" value="" placeholder="email@email.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputUsername" class="tradUsername">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" value="" placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputBirth" class="tradBirth">Date of birth</label>
-                            <input type="date" class="form-control" id="inputBirth" value="" placeholder="01/01/2000">
-                        </div>
-                        <div class="form-group">
                             <label for="inputPasswordSignUp" class="tradPassword">Password</label>
                             <input type="password" class="form-control" id="inputPasswordSignUp" value="" placeholder="********" required>
                         </div>
@@ -185,6 +174,13 @@
                             <div class="invalid-feedback tradConfirmPasswordError" id="passwordFeeback">
                                 <!-- display if password is not same -->
                             </div>
+                        </div>
+                        <div class="form-check">
+                            <small> <a>RGPD</a></label></small> <!---->
+                            <small class="form-text text-muted">
+                                <input type="checkbox" class="form-check-input" id="termsOfUse" required>
+                                <label class="form-check-label tradTermsOfUse" for="termsOfUse" id="termsOfUseLabel">By checking this box you accept the<a href="vendor/document/RGPD_FR.pdf" > RGPD</a></label>
+                            </small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -228,8 +224,6 @@
                     </a>
                 </div>
 
-
-
                 <!-- List offer -->
                 <div class="row" id="listOffer">
                 </div>
@@ -243,21 +237,23 @@
             <div class="row my-4">
                 <div class="col-lg-2">
                     <img class="img-profil" src="vendor/img/profilPicture.png" alt="">
+                    <button type="button" class="btn btn-primary alignCenter tradGetPersoData">Get my personal data</button>
+                    <button type="button" class="btn btn-secondary alignCenter tradDeletePersoData">Delete my account and my personal data</button>
                 </div>
                 <div class="col-lg-10">
                     <div class="form-group">
-                        <label for="inputMailSignUp">Email</label>
+                        <label for="inputMailSetting">Email</label>
                         <input type="email" class="form-control" id="inputMailSetting" value="" placeholder="loghan.r@gmail.com" required>
                     </div>
                     <div class="form-group">
-                        <label class="tradUsername" for="inputUsername">Username</label>
+                        <label class="tradUsername" for="inputUsernameSetting">Username</label>
                         <input type="text" class="form-control" id="inputUsernameSetting" value="" placeholder="Loghan RAMASSAMY">
                     </div>
                     <div class="form-group">
-                        <label class="tradBirth" for="inputBirthSetting">Date of birth</label>
-                        <input type="date" class="form-control" id="inputBirthSetting" value="1994-03-01">
+                        <label class="tradPassword" for="inputPasswordSetting">Password</label>
+                        <input type="text" class="form-control" id="inputPasswordSetting" value="" placeholder="Loghan RAMASSAMY">
                     </div>
-                    <button type="button" class="btn btn-primary alignRight tradUpdate" id="updateUser">Update</button>
+                    <button type="button" class="btn btn-success alignRight tradUpdate" id="updateUser">Update</button>
                     <button type="button" class="btn btn-secondary alignRight tradCancel">Reset</button>
                 </div>
             </div>
@@ -365,7 +361,7 @@
         </div>
     </div>
 
-    <!-- Offer add page -->
+    <!-- Page Add Offer -->
     <div id="addOfferPage">
         <form>
             <div class="row my-4">
@@ -374,18 +370,18 @@
                 </div>
                 <div class="col-lg-10">
                     <div class="form-group">
-                        <label class="tradName">Name</label>
-                        <input type="text" class="form-control" value="" placeholder="" required>
+                        <label class="tradArticleName">Name</label>
+                        <input type="text" class="form-control" id="articleName" required>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" class="form-control" value="" placeholder="" required>
+                        <input type="text" class="form-control" id="articleDescription" required>
                     </div>
                     <div class="form-group">
                         <label class="tradPrice">Price</label>(<span class="tradMoneyLogo">€</span>)
-                        <input type="number" class="form-control" value="" required>
+                        <input type="number" class="form-control" id="articlePrice" required>
                     </div>
-                    <button type="button" class="btn btn-primary alignRight tradAdd" >Add</button>
+                    <button type="button" class="btn btn-primary alignRight tradAdd" id="btnAddOffer">Add</button>
                     <button type="button" class="btn btn-secondary alignRight tradCancel">Reset</button>
                 </div>
             </div>

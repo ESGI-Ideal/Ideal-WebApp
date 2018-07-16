@@ -37,7 +37,7 @@ function oauthSignIn() {
 }
 
 function checkLoginPwd (mail, pwd){
-    var url = "http://localhost:8888/user"
+    var url = urlServer + "user"
     var checkLogin = false;
 
     $.support.cors = true;
@@ -67,7 +67,7 @@ function checkLoginPwd (mail, pwd){
 function getToken(id, mail, pwd){
 //var signin = function() {
 
-    var tokenUrl = "http://localhost:8888/oauth2/token";
+    var tokenUrl = urlServer + "oauth2/token";
 
     var params = {"grant_type":"password",
         "client_id":id,

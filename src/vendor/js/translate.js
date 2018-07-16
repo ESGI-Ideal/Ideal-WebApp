@@ -54,7 +54,11 @@ i18next.init({
                 "tradAddOffer" : "Add offer",
                 "tradAdministration" : "Administration",
                 "tradAdd" : "Add",
-                "tradUpdate" : "Update"
+                "tradUpdate" : "Update",
+                "tradArticleName" : "Article name",
+                "tradTermsOfUse" : "By checking this box you accept the",
+                "tradGetPersoData" : "Get my personal data",
+                "tradDeletePersoData" : "Delete my account and my personal data"
 		    }
 		},
 		"fr-FR": {
@@ -92,7 +96,11 @@ i18next.init({
 				"tradAddOffer" : "Ajouter une offre",
                 "tradAdministration" : "Administration",
                 "tradAdd" : "Ajouter",
-                "tradUpdate" : "Mise à jour"
+                "tradUpdate" : "Mise à jour",
+                "tradArticleName" : "Nom de l'article",
+                "tradTermsOfUse" : "En cochant cette case vous acceptez le",
+                "tradGetPersoData" : "Récupérer mes données personnels",
+                "tradDeletePersoData" : "Supprimer mon compte ainsi que mes données personnels"
 		    }
 		}
 	}
@@ -133,7 +141,10 @@ function updateContent() {
     $('.tradAdministration').text(i18next.t('tradAdministration'));
     $('.tradAdd').text(i18next.t('tradAdd'));
     $('.tradUpdate').text(i18next.t('tradUpdate'));
-
+    $('.tradArticleName').text(i18next.t('tradArticleName'));
+    $('.tradTermsOfUse').text(i18next.t('tradTermsOfUse'));
+    $('.tradGetPersoData').text(i18next.t('tradGetPersoData'));
+    $('.tradDeletePersoData').text(i18next.t('tradDeletePersoData'));
 }
 
 function changeLng(lng) {

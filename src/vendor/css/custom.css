@@ -1,10 +1,12 @@
 /* IDeal */
 
 html,
-body { height: 100% }
+body {
+    height: 100%;
+    background-color: #f5f5f5;
+}
 
 body { padding-top: 54px }
-body { background-color: #f5f5f5 }
 @media (min-width: 992px) {
     body { padding-top: 56px }
 }
@@ -38,6 +40,8 @@ img {
 .alignTextCenter { text-align: center }
 .textBold { font-weight: bold }
 .cursorAsPointer { cursor:pointer }
+
+
 
 #userPage { display: none; }
 #partnerPage { display: none; }
