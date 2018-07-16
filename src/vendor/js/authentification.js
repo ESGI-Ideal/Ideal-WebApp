@@ -2,17 +2,6 @@
  * Create form to request access token from Google's OAuth 2.0 server.
  */
 
-function getToken2(aMail, aPassword){
-    alert("Je suis dans la function");
-    $.post("http://localhost:8888/oauth2/token",
-        {
-            mail: aMail,
-            password: aPassword
-        },
-        function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });
-}
 
 function oauthSignIn() {
     // Google's OAuth 2.0 endpoint for requesting an access token
@@ -47,16 +36,43 @@ function oauthSignIn() {
     form.submit();
 }
 
+function checkLoginPwd (mail, pwd){
+    var url = "http://localhost:8888/user"
+    var checkLogin = false;
 
-function getToken(aMail, aPassword){
+    $.support.cors = true;
+    $.getJSON(
+        url,
+        function(data){
+            if (data.length > 1) {
+                $.each(data, function (key, val) {
+                    alert(val.id + val.mail + val.password + val.psw_hash + val.inscription + val.admin);
+                    if(mail == val.mail && pwd == val.password) {
+                        alert("Utilisateur trouvé");
+                        checkLogin = true;
+                        getToken(val.id, val.mail, val.password);
+                    }
+                });
+            }
+        }
+    );
+    alert("alert !!");
+    if(!checkLogin){
+        alert("Email ou mot de passe invalide !");
+        return;
+    }
+}
+
+
+function getToken(id, mail, pwd){
 //var signin = function() {
 
     var tokenUrl = "http://localhost:8888/oauth2/token";
 
     var params = {"grant_type":"password",
-        "client_id":"",
-        "username":aMail,
-        "password":aPassword,
+        "client_id":id,
+        "username":mail,
+        "password":pwd,
         "secret":"secret_",
         "scope":"nimportequoi"
     };

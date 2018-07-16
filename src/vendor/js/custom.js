@@ -35,10 +35,15 @@ $(function(){
     });
 
     //getToken('user@mail.com', 'password');
-    $('#loginButtonTest').click(function() {
+    $('#loginButton').click(function() {
         alert("Je lance la function");
         //var loginData = $("#userSignup").serialize();
-        getToken('user@mail.com', 'password');
+        //getToken('user@mail.com', 'password');
+        var theMail = $("#inputMail").val();
+        var thePassword = $("#inputPassword").val();
+        alert(theMail + "    " + thePassword);
+        checkLoginPwd(theMail, thePassword);
+        //getToken(theMail, thePassword);
         alert("J'ai terminé la function");
     });
 
